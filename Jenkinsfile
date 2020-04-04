@@ -20,5 +20,5 @@ pipeline {
                     sh 'mvn package'
                 }
             }
-    }
+       }
 }
