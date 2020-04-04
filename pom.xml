@@ -29,12 +29,8 @@
                             <transformers>
                                 <transformer
                                     implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-<<<<<<< HEAD
-                                    <mainClass>hello.HelloWorld</mainClass>
-=======
-                                    <mainClass>hello.helloworld</mainClass>
->>>>>>> 5cb46e05a5dc2f744762971d326253a60616c9e9
-                                </transformer>
+                                    <mainClass>hello.HelloWold</mainClass>
+   			        </transformer>
                             </transformers>
                         </configuration>
                     </execution>
