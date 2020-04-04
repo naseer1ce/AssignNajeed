@@ -1,23 +1,24 @@
-node{
-    
-stage('Build Docker Image'){
-  sh 'docker build -t nodejs:build .'
-  sh 'docker tag nodejs:build naseerce1/nodejs'
- }
+pipeline {
+    agent any
+    stages {
+        stage ('Compile') {
 
-stage('Push Docker Image'){
-   withCredentials([string(credentialsId: 'Dockerpwd', variable: 'dockerpwd')]) {
+            steps {
+                sh 'mvn compile'
+                }
+            }
 
-    sh "docker login -u naseerce1 -p ${dockerpwd}"
-   }    
-     sh 'docker push naseerce1/nodejs'
-  }
-stage ('Run Container on DevEnv'){  
-    
-    def dockerrun = 'sudo docker run -d -p 3000:3000 --name myapp naseerce1/nodejs'
-    
-    sshagent(['deployinstance']) {
-    sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.31.115 ${dockerrun}"
+        stage ('Testing Stage') {
+
+            steps {
+                 sh 'mvn test'
+                }
+            }
+
+        stage ('Package') {
+            steps {
+                    sh 'mvn package'
+                }
+           }
     }
-  } 
-} 
+}
