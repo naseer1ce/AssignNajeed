@@ -18,6 +18,7 @@ pipeline {
         stage ('Package') {
             steps {
                     sh 'mvn package'
+		    echo "Najeed is good player in ping pong"
                 }
         }
     }
