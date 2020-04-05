@@ -1,7 +1,7 @@
 node{
     
 stage('Build Docker Image'){
-  sh 'docker build -t nodejs:build .'
+  sh 'docker build -t nodejs:build /home/ec2-user/Git/AssignNajeed'
   sh 'docker tag nodejs:build naseerce1/nodejs'
  }
 
