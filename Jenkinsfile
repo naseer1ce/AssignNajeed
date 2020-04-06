@@ -1,5 +1,6 @@
 pipeline {
 	agent any
+        stages{
            stage ('Deploy'){
 		   steps{
 			sshagent(['deployinstance']) {
@@ -14,4 +15,5 @@ pipeline {
      }
    }
  }
+}
 }
