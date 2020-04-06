@@ -1,25 +1,15 @@
 pipeline {
-    agent any
-    stages {
-        stage ('Compile') {
-
-            steps {
-                sh 'mvn compile'
-                }
-            }
-
-        stage ('Testing Stage') {
-
-            steps {
-                 sh 'mvn test'
-                }
-            }
-
-        stage ('Package') {
-            steps {
-                    sh 'mvn package'
-		    echo "Najeed is good player in ping pong"
-                }
-        }
+    stage ('Deploy'){  
+    
+    sshagent(['deployinstance']) {
+    sh "scp -o StrictHostKeyChecking=no bash.sh ec2-user@172.31.31.115:/home/ec2-user/"
+    script{
+	try{
+	     sh "ssh ec2-user@172.31.28.81 sudo ./bash.sh"
+	}catch(error){
+	     sh "ssh ec2-user@172.31.28.81 sudo ./bash.sh"
+         }
+      }
     }
+  }
 }
